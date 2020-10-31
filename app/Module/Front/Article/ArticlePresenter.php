@@ -8,6 +8,7 @@ use App\Model\Article\Article;
 use App\Model\Article\ArticleFacade;
 use App\Model\Article\Exception\ArticleNotFoundException;
 use App\Module\Front\BaseFrontPresenter;
+use Tracy\Debugger;
 
 /**
  * @property ArticleTemplate $template
@@ -29,7 +30,20 @@ class ArticlePresenter extends BaseFrontPresenter
 		} catch (ArticleNotFoundException) {
 			$this->error('Article not found', 404);
 		}
-	}
+  }
+  
+  public function actionSearch(string $query)
+  {
+    try {
+      $articles = $this->articleFacade->getSearchResults($query);
+
+      if ($this->isAjax()) return $this->sendJson(['results' => $articles]);
+
+      // Pokud neni ajax request, vyrenderovat search page? nebo neco jineho?
+    } catch (\Exception $e) {
+      throw $e;
+    }
+  }
 	
 	public function renderDefault(string $slug): void
 	{

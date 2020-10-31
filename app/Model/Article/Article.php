@@ -9,12 +9,12 @@ use Parsedown;
 
 class Article
 {
-	private string $slug;
-	private string $title;
-	private string $author;
-	private string $content;
-	private DateTime $createdAt;
-	private DateTime $updatedAt;
+	public string $slug;
+	public string $title;
+	public string $author;
+	public string $content;
+	public DateTime $createdAt;
+	public DateTime $updatedAt;
 	
 	public function __construct(ArticleData $data)
 	{

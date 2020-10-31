@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.31.0",
+    "@vue/babel-preset-app": "^4.5.8",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.4",
+    "vue-template-compiler": "^2.6.12"
+  }
+}

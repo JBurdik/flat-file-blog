@@ -20,7 +20,19 @@ class AuthPresenter extends BaseFrontPresenter
 		private SignInFormFactory $signInFormFactory
 	) {
 		parent::__construct();
-	}
+  }
+  
+  public function actionDefault(string $username = null, string $password = null): void
+  {
+    if ($this->request->isMethod('POST') && $this->isAjax()) {
+      try {
+        $this->user->login($username, $password);
+        $this->sendJson(['success' => true]);
+      } catch (AuthenticationException $e) {
+        $this->sendJson(['success' => false, 'message' => 'Bad credentials']);
+      }
+    }
+  }
 	
 	public function createComponentSignInForm(): Form
 	{
